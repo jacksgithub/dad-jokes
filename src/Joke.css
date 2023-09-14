@@ -1,0 +1,106 @@
+.Joke {
+	height: 80px;
+	margin: 0px;
+	padding: 0px 15px 0px 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #ccc;
+}
+.Joke-text {
+	margin-right: 20px;
+	text-align: left;
+	width: 80%;
+}
+.Joke-num {
+	font: 20px Arial, sans-serif;
+	line-height: 38px;
+	display: inline-block;
+	border: 3px solid #ccc;
+	border-radius: 50%;
+	text-align: center;
+	width: 40px;
+	height: 40px;
+	/* box-shadow: 1px 3px 5px 2px rgb(127 127 127 / 20%); */
+	box-shadow: 0 10px 38px rgba(0, 0, 0, 0.2), 0 10px 12px rgba(0, 0, 0, 0.1);
+}
+.Joke-rating {
+	width: 15%;
+	display: flex;
+	margin-right: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+.Joke-upVote,
+.Joke-downVote {
+	font-size: 18px;
+	padding: 3px;
+	margin: 3px;
+	cursor: pointer;
+}
+.Joke-upVote:hover {
+	animation-name: move-up;
+	animation-duration: 0.7s;
+	animation-timing-function: ease-out;
+	color: #8bc34a;
+}
+.Joke-downVote:hover {
+	animation-name: move-down;
+	animation-duration: 0.7s;
+	animation-timing-function: ease-out;
+	color: #f44336;
+}
+
+@keyframes move-up {
+	0%,
+	50%,
+	100% {
+		transform: translateY(0);
+	}
+	25%,
+	75% {
+		transform: translateY(-3px);
+	}
+}
+@keyframes move-down {
+	0%,
+	50%,
+	100% {
+		transform: translateY(0);
+	}
+	25%,
+	75% {
+		transform: translateY(3px);
+	}
+}
+
+.Joke-smiley {
+	font-size: 1.8rem;
+	margin-left: auto;
+	border-radius: 50%;
+	box-shadow: 0 10px 38px rgba(0, 0, 0, 0.2), 0 10px 12px rgba(0, 0, 0, 0.1);
+}
+.Joke-smiley:hover {
+	animation-name: spin;
+	animation-duration: 0.7s;
+	animation-timing-function: ease-in-out;
+	animation-delay: 0s;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	30% {
+		transform: rotate(20deg);
+	}
+	60% {
+		transform: rotate(0deg);
+	}
+	80% {
+		transform: rotate(10deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
