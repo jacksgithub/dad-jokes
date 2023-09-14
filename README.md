@@ -1,6 +1,6 @@
 # Dad Jokes App
 
-An app to mess around with React. It fetches dad jokes and stores them in local storage.
+A simple React app which fetches dad jokes from https://icanhazdadjoke.com/ and stores them in local storage.
 
 ## Notes
 
