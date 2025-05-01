@@ -1,14 +1,12 @@
 .Joke {
-	height: 80px;
 	margin: 0px;
-	padding: 0px 15px 0px 10px;
+	padding: 20px 5px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid #ccc;
 }
 .Joke-text {
-	margin-right: 20px;
 	text-align: left;
 	width: 80%;
 }
@@ -25,9 +23,9 @@
 	box-shadow: 0 10px 38px rgba(0, 0, 0, 0.2), 0 10px 12px rgba(0, 0, 0, 0.1);
 }
 .Joke-rating {
-	width: 15%;
+	width: 100px;
 	display: flex;
-	margin-right: 1rem;
+	margin-right: 0.5rem;
 	align-items: center;
 	justify-content: center;
 }
@@ -102,5 +100,19 @@
 	}
 	100% {
 		transform: rotate(0deg);
+	}
+}
+
+@media (min-width: 768px) {
+	.Joke {
+		height: 80px;
+		padding: 0px 15px 0px 10px;
+	}
+	.Joke-rating {
+		width: 15%;
+		margin-right: 1rem;
+	}
+	.Joke-text {
+		margin-right: 20px;
 	}
 }

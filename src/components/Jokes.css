@@ -1,13 +1,12 @@
 .Jokes {
-	width: 90%;
-	height: 80%;
+	width: 100vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 .Jokes-logo-container {
-	width: 30%;
-	height: 660px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -19,8 +18,8 @@
 	z-index: 2;
 }
 .Jokes-logo-container h1 {
-	font-size: 2.9rem;
-	margin: 2rem;
+	font-size: 1.5rem;
+	margin: 1rem;
 	font-weight: 300;
 	letter-spacing: 0.4rem;
 }
@@ -29,16 +28,13 @@
 	letter-spacing: 0;
 }
 .Jokes-logo img {
-	width: 50%;
+	width: 30%;
 	border-radius: 50%;
 	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 }
 
 .Jokes-container {
-	width: 70%;
-	height: 90%;
-	/* color: #8d888e; */
 	overflow-y: scroll;
 	background-color: #fff;
 	box-shadow: 6px 6px 10px 1px rgba(0, 0, 0, 0.4);
@@ -52,17 +48,19 @@
 	text-align: center;
 }
 
-.Jokes-btn {
+.Jokes-btn,
+.Jokes-btn2 {
 	width: 100%;
 }
-.Jokes-btn button {
-	font-size: 1.2rem;
-	width: 50%;
+.Jokes-btn button,
+.Jokes-btn2 button {
+	font-size: 1rem;
+	width: 60%;
 	border-radius: 2rem;
 	padding: 1rem 2rem;
 	color: white;
 	font-weight: 700;
-	margin: 2rem;
+	margin: 0 0 1.5rem;
 	border: none;
 	word-spacing: 1rem;
 	cursor: pointer;
@@ -77,14 +75,19 @@
 	);
 	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
 }
+.Jokes-btn2 button {
+	padding: 0.5rem 2rem;
+}
 
-.Jokes-btn button:hover {
+.Jokes-btn button:hover,
+.Jokes-btn2 button:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
 
 .Jokes-spinner {
 	position: absolute;
+	top: 0;
 	z-index: 5;
 	color: mediumpurple;
 	height: 100vh;
@@ -255,5 +258,36 @@
 	}
 	98% {
 		transform: translate(10px, -9px) rotate(2.5deg);
+	}
+}
+
+@media (min-width: 768px) {
+	.Jokes {
+		width: 90%;
+		height: 80%;
+		flex-direction: row;
+	}
+	.Jokes-logo-container {
+		width: 30%;
+		height: 660px;
+	}
+	.Jokes-logo-container h1 {
+		font-size: 2.9rem;
+		margin: 2rem;
+	}
+	.Jokes-logo img {
+		width: 50%;
+		margin-bottom: 40px;
+	}
+	.Jokes-btn button {
+		font-size: 1.2rem;
+		width: 50%;
+		padding: 1rem 2rem;
+		margin: 2rem;
+	}
+
+	.Jokes-container {
+		width: 70%;
+		height: 90%;
 	}
 }
