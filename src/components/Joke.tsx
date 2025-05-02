@@ -4,10 +4,17 @@ interface IJokeProps {
 	id: string;
 	joke: string;
 	votes: number;
+	active: boolean;
 	handleVote: (id: string, delta: number) => void;
 }
 
-export default function Joke({ id, joke, votes, handleVote }: IJokeProps) {
+export default function Joke({
+	id,
+	joke,
+	votes,
+	active,
+	handleVote,
+}: IJokeProps) {
 	const getColor = () => {
 		if (votes >= 15) {
 			return '#4CAF50';
@@ -43,16 +50,20 @@ export default function Joke({ id, joke, votes, handleVote }: IJokeProps) {
 		}
 	};
 	return (
-		<div className="Joke">
+		<div className={active ? 'Joke active' : 'Joke'}>
 			<span className="Joke-rating">
-				<span className="Joke-upVote" onClick={() => handleVote(id, 1)}>
-					&uarr;
-				</span>
 				<span className="Joke-num" style={{ borderColor: getColor() }}>
 					{votes}
 				</span>
-				<span className="Joke-downVote" onClick={() => handleVote(id, -1)}>
-					&darr;
+				<span className="Joke-vote-container">
+					{votes < 15 && (
+						<span className="Joke-upVote" onClick={() => handleVote(id, 1)}>
+							&uarr;
+						</span>
+					)}
+					<span className="Joke-downVote" onClick={() => handleVote(id, -1)}>
+						&darr;
+					</span>
 				</span>
 			</span>
 			<span className="Joke-text">{joke}</span>

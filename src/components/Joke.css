@@ -6,6 +6,18 @@
 	align-items: center;
 	border-bottom: 1px solid #ccc;
 }
+.Joke.active {
+	animation: fade-in 3s;
+}
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 100;
+	}
+}
+
 .Joke-text {
 	text-align: left;
 	width: 80%;
@@ -23,11 +35,15 @@
 	box-shadow: 0 10px 38px rgba(0, 0, 0, 0.2), 0 10px 12px rgba(0, 0, 0, 0.1);
 }
 .Joke-rating {
-	width: 100px;
+	width: 80px;
 	display: flex;
 	margin-right: 0.5rem;
 	align-items: center;
 	justify-content: center;
+}
+.Joke-vote-container {
+	display: flex;
+	flex-direction: column;
 }
 .Joke-upVote,
 .Joke-downVote {
@@ -38,13 +54,13 @@
 }
 .Joke-upVote:hover {
 	animation-name: move-up;
-	animation-duration: 0.7s;
+	animation-duration: 2s;
 	animation-timing-function: ease-out;
 	color: #8bc34a;
 }
 .Joke-downVote:hover {
 	animation-name: move-down;
-	animation-duration: 0.7s;
+	animation-duration: 2s;
 	animation-timing-function: ease-out;
 	color: #f44336;
 }

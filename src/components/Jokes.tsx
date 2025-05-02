@@ -14,7 +14,7 @@ interface IJokes {
 }
 
 export default function Jokes({ jokesNum, apiURL }: IJokes) {
-	let existingJokes = new Set();
+	let existingJokes = new Set(); // IDs of jokes currently displayed
 
 	// State
 	const [jokes, setJokes] = useState<IJoke[]>(
@@ -48,6 +48,7 @@ export default function Jokes({ jokesNum, apiURL }: IJokes) {
 						joke: res.data.joke,
 						id: res.data.id,
 						votes: 0,
+						active: false,
 					});
 					existingJokes.add(res.data.id);
 				}
@@ -59,29 +60,49 @@ export default function Jokes({ jokesNum, apiURL }: IJokes) {
 		}
 		setLoading(false);
 	};
-	const handleVote = (id: string, delta: number) => {
-		const updatedJokes = jokes.map((j) =>
-			j.id === id ? { ...j, votes: j.votes + delta } : j
+	const handleVote = (idToUpdate: string, delta: number) => {
+		const updatedJokes = jokes.map((j, idx) =>
+			j.id === idToUpdate
+				? { ...j, votes: j.votes + delta, active: isActive(idx, delta) }
+				: { ...j, active: false }
 		);
-		setJokes(updatedJokes);
+		// > 0	sort a after b; < 0	sort a before b
+		const jokesSorted = updatedJokes.sort((a, b) => b.votes - a.votes);
+		setJokes(jokesSorted);
 	};
-	const handleClick = () => {
+	const handleClickNewJokes = () => {
 		getJokes();
 	};
 	const handleClickClearJokes = () => {
 		setJokes([]);
 	};
-	// > 0	sort a after b; < 0	sort a before b
-	const jokesSorted = jokes.sort((a, b) => b.votes - a.votes);
-	const jokesSortedComponents = jokesSorted.map((jk) => (
+	// Do we need to add active class to joke to fade it in when it moves position
+	const isActive = (idx: number, delta: number) => {
+		let isActive = false;
+		// Add class if upvoting & joke before has same vote count
+		if (delta === 1 && idx > 0 && jokes[idx - 1].votes == jokes[idx].votes)
+			isActive = true;
+		// Add class if downvoting & joke after has same vote count
+		if (
+			delta === -1 &&
+			idx < jokes.length - 1 &&
+			jokes[idx + 1].votes == jokes[idx].votes
+		)
+			isActive = true;
+		return isActive;
+	};
+
+	const jokesSortedComponents = jokes.map((jk) => (
 		<Joke
 			key={jk.id}
 			id={jk.id}
 			joke={jk.joke}
 			votes={jk.votes}
+			active={jk.active}
 			handleVote={handleVote}
 		/>
 	));
+
 	return (
 		<div className="Jokes">
 			<div className="Jokes-logo-container">
@@ -92,7 +113,7 @@ export default function Jokes({ jokesNum, apiURL }: IJokes) {
 					<img src={smiley1} />
 				</div>
 				<div className="Jokes-btn">
-					<button onClick={handleClick}>New Jokes</button>
+					<button onClick={handleClickNewJokes}>New Jokes</button>
 				</div>
 				<div className="Jokes-btn2">
 					<button onClick={handleClickClearJokes}>Clear Jokes</button>
