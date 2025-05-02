@@ -5,7 +5,9 @@ interface IJokeProps {
 	joke: string;
 	votes: number;
 	active: boolean;
+	saved: boolean;
 	handleVote: (id: string, delta: number) => void;
+	handleSaveToggle: (id: string) => void;
 }
 
 export default function Joke({
@@ -13,8 +15,11 @@ export default function Joke({
 	joke,
 	votes,
 	active,
+	saved,
 	handleVote,
+	handleSaveToggle,
 }: IJokeProps) {
+	// Color for vote count circle
 	const getColor = () => {
 		if (votes >= 15) {
 			return '#4CAF50';
@@ -32,6 +37,7 @@ export default function Joke({
 			return '#f44336';
 		}
 	};
+	// Emoji based on vote count
 	const getEmoji = () => {
 		if (votes >= 15) {
 			return 'em em-rolling_on_the_floor_laughing';
@@ -49,8 +55,15 @@ export default function Joke({
 			return 'em em-angry';
 		}
 	};
+	const getClasses = () => {
+		let classes = 'Joke';
+		if (active) classes += ' active';
+		if (saved) classes += ' saved';
+		return classes;
+	};
+
 	return (
-		<div className={active ? 'Joke active' : 'Joke'}>
+		<div className={getClasses()}>
 			<span className="Joke-rating">
 				<span className="Joke-num" style={{ borderColor: getColor() }}>
 					{votes}
@@ -66,7 +79,11 @@ export default function Joke({
 					</span>
 				</span>
 			</span>
-			<span className="Joke-text">{joke}</span>
+			<span className="Joke-text" onClick={() => handleSaveToggle(id)}>
+				{joke}
+				<i className="em em---1" aria-label="THUMBS UP SIGN"></i>
+				<i className="em em--1" aria-label="THUMBS DOWN SIGN"></i>
+			</span>
 			<span className="Joke-smiley">
 				<i className={getEmoji()} />
 			</span>

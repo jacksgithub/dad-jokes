@@ -33,11 +33,15 @@
 	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
 	margin-bottom: 20px;
 }
+.Jokes-note {
+	margin-top: 0px;
+}
 
 .Jokes-container {
 	overflow-y: scroll;
 	background-color: #fff;
 	box-shadow: 6px 6px 10px 1px rgba(0, 0, 0, 0.4);
+	width: 100%;
 }
 .Jokes ul {
 	list-style-type: none;
@@ -106,6 +110,21 @@
 	height: 100%;
 	z-index: 4;
 	background: rgba(255, 255, 255, 0.2);
+}
+.fa-laugh {
+	max-width: 20%;
+	color: mediumpurple;
+}
+.fa-spin {
+	animation: fa-spin 2s infinite linear;
+}
+@keyframes fa-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(1turn);
+	}
 }
 
 @keyframes shake-slow {

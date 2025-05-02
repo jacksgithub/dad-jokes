@@ -3,4 +3,5 @@ export default interface IJoke {
 	joke: string;
 	votes: number;
 	active: boolean;
+	saved: boolean;
 }
