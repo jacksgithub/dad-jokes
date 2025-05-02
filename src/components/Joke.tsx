@@ -20,43 +20,29 @@ export default function Joke({
 	handleSaveToggle,
 }: IJokeProps) {
 	// Color for vote count circle
-	const getColor = () => {
+	const getVoteMeta = () => {
 		const thresholds = [
-			{ min: 15, color: '#4CAF50' },
-			{ min: 12, color: '#8BC34A' },
-			{ min: 9, color: '#CDDC39' },
-			{ min: 6, color: '#FFEB3B' },
-			{ min: 3, color: '#FFC107' },
-			{ min: 0, color: '#FF9800' },
+			{
+				min: 15,
+				color: '#4CAF50',
+				emoji: 'em em-rolling_on_the_floor_laughing',
+			},
+			{ min: 12, color: '#8BC34A', emoji: 'em em-laughing' },
+			{ min: 9, color: '#CDDC39', emoji: 'em em-smiley' },
+			{ min: 6, color: '#FFEB3B', emoji: 'em em-slightly_smiling_face' },
+			{ min: 3, color: '#FFC107', emoji: 'em em-neutral_face' },
+			{ min: 0, color: '#FF9800', emoji: 'em em-confused' },
 		];
 
-		for (const threshold of thresholds) {
-			if (votes >= threshold.min) {
-				return threshold.color;
-			}
-		}
+		const result = thresholds.find((t) => votes >= t.min) || {
+			color: '#f44336',
+			emoji: 'em em-angry',
+		};
 
-		return '#f44336'; // For votes < 0
-	};
-
-	// Emoji based on vote count
-	const getEmoji = () => {
-		const emojiThresholds = [
-			{ min: 15, emoji: 'em em-rolling_on_the_floor_laughing' },
-			{ min: 12, emoji: 'em em-laughing' },
-			{ min: 9, emoji: 'em em-smiley' },
-			{ min: 6, emoji: 'em em-slightly_smiling_face' },
-			{ min: 3, emoji: 'em em-neutral_face' },
-			{ min: 0, emoji: 'em em-confused' },
-		];
-
-		for (const threshold of emojiThresholds) {
-			if (votes >= threshold.min) {
-				return threshold.emoji;
-			}
-		}
-
-		return 'em em-angry'; // For votes < 0
+		return {
+			color: result.color,
+			emoji: result.emoji,
+		};
 	};
 
 	// Build the class list as an array and filter out any false values, then join it into a string.
@@ -69,7 +55,7 @@ export default function Joke({
 	return (
 		<div className={getClasses()}>
 			<span className="Joke-rating">
-				<span className="Joke-num" style={{ borderColor: getColor() }}>
+				<span className="Joke-num" style={{ borderColor: getVoteMeta().color }}>
 					{votes}
 				</span>
 				<span className="Joke-vote-container">
@@ -89,7 +75,7 @@ export default function Joke({
 				<i className="em em--1" aria-label="THUMBS DOWN SIGN"></i>
 			</span>
 			<span className="Joke-smiley">
-				<i className={getEmoji()} />
+				<i className={getVoteMeta().emoji} />
 			</span>
 		</div>
 	);
