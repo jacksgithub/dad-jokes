@@ -21,45 +21,49 @@ export default function Joke({
 }: IJokeProps) {
 	// Color for vote count circle
 	const getColor = () => {
-		if (votes >= 15) {
-			return '#4CAF50';
-		} else if (votes >= 12) {
-			return '#8BC34A';
-		} else if (votes >= 9) {
-			return '#CDDC39';
-		} else if (votes >= 6) {
-			return '#FFEB3B';
-		} else if (votes >= 3) {
-			return '#FFC107';
-		} else if (votes >= 0) {
-			return '#FF9800';
-		} else {
-			return '#f44336';
+		const thresholds = [
+			{ min: 15, color: '#4CAF50' },
+			{ min: 12, color: '#8BC34A' },
+			{ min: 9, color: '#CDDC39' },
+			{ min: 6, color: '#FFEB3B' },
+			{ min: 3, color: '#FFC107' },
+			{ min: 0, color: '#FF9800' },
+		];
+
+		for (const threshold of thresholds) {
+			if (votes >= threshold.min) {
+				return threshold.color;
+			}
 		}
+
+		return '#f44336'; // For votes < 0
 	};
+
 	// Emoji based on vote count
 	const getEmoji = () => {
-		if (votes >= 15) {
-			return 'em em-rolling_on_the_floor_laughing';
-		} else if (votes >= 12) {
-			return 'em em-laughing';
-		} else if (votes >= 9) {
-			return 'em em-smiley';
-		} else if (votes >= 6) {
-			return 'em em-slightly_smiling_face';
-		} else if (votes >= 3) {
-			return 'em em-neutral_face';
-		} else if (votes >= 0) {
-			return 'em em-confused';
-		} else {
-			return 'em em-angry';
+		const emojiThresholds = [
+			{ min: 15, emoji: 'em em-rolling_on_the_floor_laughing' },
+			{ min: 12, emoji: 'em em-laughing' },
+			{ min: 9, emoji: 'em em-smiley' },
+			{ min: 6, emoji: 'em em-slightly_smiling_face' },
+			{ min: 3, emoji: 'em em-neutral_face' },
+			{ min: 0, emoji: 'em em-confused' },
+		];
+
+		for (const threshold of emojiThresholds) {
+			if (votes >= threshold.min) {
+				return threshold.emoji;
+			}
 		}
+
+		return 'em em-angry'; // For votes < 0
 	};
+
+	// Build the class list as an array and filter out any false values, then join it into a string.
 	const getClasses = () => {
-		let classes = 'Joke';
-		if (active) classes += ' active';
-		if (saved) classes += ' saved';
-		return classes;
+		return ['Joke', active && 'active', saved && 'saved']
+			.filter(Boolean)
+			.join(' ');
 	};
 
 	return (
